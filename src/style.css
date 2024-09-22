@@ -26,6 +26,11 @@ body {
     left: 10px;
 }
 
+.center {
+    top: 10px;
+    right: 200px;
+}
+
 .right {
     top: 10px;
     right: 10px;
@@ -33,6 +38,7 @@ body {
 
 .grid {
     display: grid;
+    cursor: url('field/img/cursor.png'), auto;
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: repeat(4, 100px);
     gap: 10px;

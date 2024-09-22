@@ -2,6 +2,7 @@ export class Field {
   constructor(fieldElement) {
     this._cells = fieldElement.querySelectorAll(".cell");
     this.scoreCounterElement = document.querySelector('.scoreCounter');
+    this.failsCounterElement = document.querySelector('.failsCounter');
     this.livesCounterElement = document.querySelector('.livesCounter');
 
     this.onCellClick = this.onCellClick.bind(this);
@@ -11,6 +12,7 @@ export class Field {
   startGame() {
     this._currentCellIndex = null;
     this.scoreCounter = 0;
+    this.failsCounter = 0;
     this._counter = 0;
     this.livesCounter = 5;
     this._updateScoreCounter();
@@ -23,14 +25,19 @@ export class Field {
       this._hideCell(this._currentCellIndex);
     }
     clearInterval(this._interval);
+    alert(`Игра окончена счет: ${this.scoreCounter}`);
   }
 
   onCellClick(e) {
     const element = e.target.closest('.cell');
-    if (element && !element.classList.contains('hidden')) {
+    if (e.target.tagName && element && !element.classList.contains('hidden')) {
       element.classList.toggle("hidden");
       this.scoreCounter++;
       this._updateScoreCounter();
+    }
+    else {
+      this.failsCounter++;
+      this._updateFailsCounter();
     }
   }
 
@@ -40,6 +47,10 @@ export class Field {
 
   _updateScoreCounter() {
     this.scoreCounterElement.innerHTML = this.scoreCounter;
+  }
+
+  _updateFailsCounter() {
+    this.failsCounterElement.innerHTML = this.failsCounter;
   }
 
   _changeCell() {
